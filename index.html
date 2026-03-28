@@ -28,7 +28,6 @@
       min-height: 100vh;
     }
 
-    /* ── Glow blobs ── */
     .blobs {
       position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
     }
@@ -39,13 +38,11 @@
     .blob-2 { width: 500px; height: 500px; background: #db2777; top: 200px; right: -150px; }
     .blob-3 { width: 400px; height: 400px; background: #0ea5e9; bottom: -100px; left: 30%; }
 
-    /* ── Layout ── */
     .container {
       position: relative; z-index: 1;
       max-width: 760px; margin: 0 auto; padding: 0 24px;
     }
 
-    /* ── Nav ── */
     nav {
       display: flex; align-items: center; justify-content: space-between;
       padding: 28px 0 0;
@@ -61,7 +58,6 @@
     }
     nav a:hover { color: var(--text); }
 
-    /* ── Hero ── */
     .hero {
       text-align: center;
       padding: 100px 0 80px;
@@ -96,7 +92,6 @@
     .app-store-btn:hover { opacity: 0.88; transform: translateY(-1px); }
     .app-store-btn svg { width: 20px; height: 20px; }
 
-    /* ── Features ── */
     .features { padding: 20px 0 80px; }
     .section-label {
       font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
@@ -115,7 +110,7 @@
       padding: 28px 26px;
     }
     .feature-icon {
-      font-size: 26px; margin-bottom: 14px; display: block;
+      width: 48px; height: 48px; margin-bottom: 18px; display: block;
     }
     .feature-card h3 {
       font-size: 16px; font-weight: 700; margin-bottom: 8px;
@@ -124,7 +119,6 @@
       font-size: 14px; color: var(--muted); line-height: 1.6;
     }
 
-    /* ── Requirements ── */
     .requirements {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 36px; margin-bottom: 80px;
@@ -142,7 +136,6 @@
       background: var(--accent); flex-shrink: 0; margin-top: 7px;
     }
 
-    /* ── Support ── */
     .support {
       background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(219,39,119,0.1));
       border: 1px solid rgba(167,139,250,0.2);
@@ -159,7 +152,6 @@
     }
     .support-link:hover { background: rgba(167,139,250,0.1); }
 
-    /* ── Footer ── */
     footer {
       border-top: 1px solid var(--border);
       padding: 28px 0; text-align: center;
@@ -204,36 +196,147 @@
       <p class="section-label">Features</p>
       <h2>Intelligence built in.</h2>
       <div class="feature-grid">
+
         <div class="feature-card">
-          <span class="feature-icon">📡</span>
+          <!-- Spatial mapping: 3D axes with floating light-position dots and drop lines -->
+          <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gi1" x1="4" y1="44" x2="44" y2="4" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+              </linearGradient>
+              <radialGradient id="gr1" cx="50%" cy="50%" r="50%">
+                <stop stop-color="#a78bfa" stop-opacity=".12"/>
+                <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="24" cy="24" r="22" fill="url(#gr1)"/>
+            <path d="M8 38 L24 28 L40 38" stroke="url(#gi1)" stroke-width="1.5" stroke-opacity=".45" fill="none" stroke-linejoin="round"/>
+            <line x1="24" y1="28" x2="24" y2="10" stroke="url(#gi1)" stroke-width="1.5" stroke-opacity=".45"/>
+            <line x1="16" y1="20" x2="14" y2="36" stroke="url(#gi1)" stroke-width="1" stroke-dasharray="2 2" stroke-opacity=".4"/>
+            <line x1="33" y1="21" x2="35" y2="37" stroke="url(#gi1)" stroke-width="1" stroke-dasharray="2 2" stroke-opacity=".4"/>
+            <line x1="24" y1="15" x2="24" y2="28" stroke="url(#gi1)" stroke-width="1" stroke-dasharray="2 2" stroke-opacity=".4"/>
+            <circle cx="14" cy="36" r="2.5" fill="#a78bfa" fill-opacity=".45"/>
+            <circle cx="35" cy="37" r="2.5" fill="#a78bfa" fill-opacity=".45"/>
+            <circle cx="16" cy="20" r="3.5" fill="url(#gi1)"/>
+            <circle cx="33" cy="21" r="3.5" fill="url(#gi1)"/>
+            <circle cx="24" cy="15" r="4.5" fill="url(#gi1)"/>
+            <circle cx="22.8" cy="13.8" r="1.8" fill="white" fill-opacity=".75"/>
+          </svg>
           <h3>Spatial Light Mapping</h3>
           <p>LiDAR scans your room and identifies each bulb in 3D space automatically — no manual positioning needed.</p>
         </div>
+
         <div class="feature-card">
-          <span class="feature-icon">🎵</span>
+          <!-- Music sync: 5 equalizer bars with gradient fill -->
+          <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gi2" x1="4" y1="40" x2="44" y2="8" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+              </linearGradient>
+            </defs>
+            <rect x="5"  y="26" width="6" height="14" rx="3" fill="url(#gi2)" opacity=".6"/>
+            <rect x="13" y="16" width="6" height="24" rx="3" fill="url(#gi2)" opacity=".78"/>
+            <rect x="21" y="10" width="6" height="30" rx="3" fill="url(#gi2)"/>
+            <rect x="29" y="18" width="6" height="22" rx="3" fill="url(#gi2)" opacity=".78"/>
+            <rect x="37" y="28" width="6" height="12" rx="3" fill="url(#gi2)" opacity=".6"/>
+          </svg>
           <h3>Live Music Sync</h3>
           <p>Real-time FFT audio analysis maps bass, mid, and treble to spatial light zones. Works with any music source.</p>
         </div>
+
         <div class="feature-card">
-          <span class="feature-icon">✨</span>
+          <!-- Shows: starburst with 8 rays and glowing centre -->
+          <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gi3" x1="4" y1="44" x2="44" y2="4" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+              </linearGradient>
+              <radialGradient id="gr3" cx="50%" cy="50%" r="50%">
+                <stop stop-color="#f472b6" stop-opacity=".28"/>
+                <stop offset="1" stop-color="#f472b6" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="24" cy="24" r="20" fill="url(#gr3)"/>
+            <line x1="24" y1="24" x2="24" y2="7"  stroke="url(#gi3)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="24" y1="24" x2="37" y2="11" stroke="url(#gi3)" stroke-width="1.5" stroke-linecap="round" stroke-opacity=".7"/>
+            <line x1="24" y1="24" x2="41" y2="24" stroke="url(#gi3)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="24" y1="24" x2="37" y2="37" stroke="url(#gi3)" stroke-width="1.5" stroke-linecap="round" stroke-opacity=".7"/>
+            <line x1="24" y1="24" x2="24" y2="41" stroke="url(#gi3)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="24" y1="24" x2="11" y2="37" stroke="url(#gi3)" stroke-width="1.5" stroke-linecap="round" stroke-opacity=".7"/>
+            <line x1="24" y1="24" x2="7"  y2="24" stroke="url(#gi3)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="24" y1="24" x2="11" y2="11" stroke="url(#gi3)" stroke-width="1.5" stroke-linecap="round" stroke-opacity=".7"/>
+            <circle cx="24" cy="24" r="6" fill="url(#gi3)"/>
+            <circle cx="22.5" cy="22.5" r="2.5" fill="white" fill-opacity=".75"/>
+          </svg>
           <h3>Choreographed Shows</h3>
           <p>Twilight Cascade, Aurora Spectrum, Halloween Storm, and more — each timed to the millisecond at 50Hz.</p>
         </div>
+
         <div class="feature-card">
-          <span class="feature-icon">🎬</span>
+          <!-- Timeline editor: two track lanes with coloured segments and a playhead -->
+          <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gi4" x1="4" y1="44" x2="44" y2="4" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+              </linearGradient>
+            </defs>
+            <line x1="8" y1="19" x2="40" y2="19" stroke="url(#gi4)" stroke-width="1" stroke-opacity=".25"/>
+            <line x1="8" y1="31" x2="40" y2="31" stroke="url(#gi4)" stroke-width="1" stroke-opacity=".25"/>
+            <rect x="9"  y="15" width="11" height="8" rx="2" fill="#a78bfa" fill-opacity=".55"/>
+            <rect x="25" y="15" width="13" height="8" rx="2" fill="url(#gi4)"/>
+            <rect x="9"  y="27" width="16" height="8" rx="2" fill="url(#gi4)" fill-opacity=".65"/>
+            <rect x="31" y="27" width="8"  height="8" rx="2" fill="#f472b6" fill-opacity=".6"/>
+            <line x1="22" y1="9" x2="22" y2="42" stroke="white" stroke-width="1.5" stroke-opacity=".8" stroke-linecap="round"/>
+            <circle cx="22" cy="9" r="3.5" fill="url(#gi4)"/>
+            <circle cx="21" cy="8" r="1.4" fill="white" fill-opacity=".7"/>
+          </svg>
           <h3>Timeline Editor</h3>
           <p>Build your own shows with the keyframe editor. Define exactly when each light changes colour, temperature, or brightness.</p>
         </div>
+
         <div class="feature-card">
-          <span class="feature-icon">⚡️</span>
+          <!-- 50Hz streaming: lightning bolt with glow -->
+          <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gi5" x1="18" y1="6" x2="30" y2="44" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#f472b6"/><stop offset="1" stop-color="#a78bfa"/>
+              </linearGradient>
+              <radialGradient id="gr5" cx="50%" cy="62%" r="42%">
+                <stop stop-color="#a78bfa" stop-opacity=".22"/>
+                <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="24" cy="28" r="18" fill="url(#gr5)"/>
+            <path d="M29 7 L16 27 L23.5 27 L19 42 L34 21 L26.5 21 Z" fill="url(#gi5)"/>
+            <path d="M29 7 L16 27 L23.5 27 L19 42 L34 21 L26.5 21 Z" fill="white" fill-opacity=".1"/>
+          </svg>
           <h3>50Hz Streaming</h3>
           <p>DTLS Entertainment API bypasses the standard REST rate limit. A full room of lights responds in under 20ms.</p>
         </div>
+
         <div class="feature-card">
-          <span class="feature-icon">🏠</span>
+          <!-- Room control: floor plan with 3 glowing light circles -->
+          <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gi6" x1="4" y1="44" x2="44" y2="4" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+              </linearGradient>
+            </defs>
+            <rect x="7" y="12" width="34" height="28" rx="3" stroke="url(#gi6)" stroke-width="1.5" fill="none"/>
+            <circle cx="16" cy="22" r="7" fill="#a78bfa" fill-opacity=".12"/>
+            <circle cx="32" cy="22" r="7" fill="#f472b6" fill-opacity=".12"/>
+            <circle cx="24" cy="33" r="7" fill="#a78bfa" fill-opacity=".12"/>
+            <circle cx="16" cy="22" r="4" fill="#a78bfa" fill-opacity=".85"/>
+            <circle cx="32" cy="22" r="4" fill="url(#gi6)"/>
+            <circle cx="24" cy="33" r="4" fill="#f472b6" fill-opacity=".75"/>
+            <circle cx="15" cy="21" r="1.5" fill="white" fill-opacity=".6"/>
+            <circle cx="31" cy="21" r="1.5" fill="white" fill-opacity=".6"/>
+            <circle cx="23" cy="32" r="1.5" fill="white" fill-opacity=".6"/>
+          </svg>
           <h3>Full Room Control</h3>
           <p>Individual lights, groups, zones — all controllable with colour, temperature, and brightness.</p>
         </div>
+
       </div>
     </section>
 
