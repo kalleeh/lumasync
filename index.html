@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LumaSync — Spatial Hue Light Control</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --border: rgba(255,255,255,0.07);
+      --accent: #a78bfa;
+      --accent2: #f472b6;
+      --text: #e8e8f0;
+      --muted: #7a7a9a;
+      --radius: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Glow blobs ── */
+    .blobs {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.18;
+    }
+    .blob-1 { width: 600px; height: 600px; background: #7c3aed; top: -200px; left: -200px; }
+    .blob-2 { width: 500px; height: 500px; background: #db2777; top: 200px; right: -150px; }
+    .blob-3 { width: 400px; height: 400px; background: #0ea5e9; bottom: -100px; left: 30%; }
+
+    /* ── Layout ── */
+    .container {
+      position: relative; z-index: 1;
+      max-width: 760px; margin: 0 auto; padding: 0 24px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 0 0;
+    }
+    .nav-logo {
+      font-size: 18px; font-weight: 700; letter-spacing: -0.3px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    nav a {
+      color: var(--muted); text-decoration: none; font-size: 14px;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text); }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 100px 0 80px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(167,139,250,0.12);
+      border: 1px solid rgba(167,139,250,0.25);
+      color: var(--accent);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 999px; margin-bottom: 28px;
+    }
+    h1 {
+      font-size: clamp(36px, 6vw, 58px);
+      font-weight: 800; letter-spacing: -1.5px; line-height: 1.08;
+      margin-bottom: 20px;
+    }
+    h1 .gradient {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 18px; color: var(--muted); max-width: 500px; margin: 0 auto 40px;
+    }
+    .app-store-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--text); color: #000;
+      padding: 14px 28px; border-radius: 14px;
+      font-weight: 700; font-size: 15px; text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .app-store-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .app-store-btn svg { width: 20px; height: 20px; }
+
+    /* ── Features ── */
+    .features { padding: 20px 0 80px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    .features h2 {
+      font-size: 30px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 48px;
+    }
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 26px;
+    }
+    .feature-icon {
+      font-size: 26px; margin-bottom: 14px; display: block;
+    }
+    .feature-card h3 {
+      font-size: 16px; font-weight: 700; margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 14px; color: var(--muted); line-height: 1.6;
+    }
+
+    /* ── Requirements ── */
+    .requirements {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 36px; margin-bottom: 80px;
+    }
+    .requirements h2 {
+      font-size: 20px; font-weight: 700; margin-bottom: 20px;
+    }
+    .req-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .req-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: var(--muted);
+    }
+    .req-list li span.dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; margin-top: 7px;
+    }
+
+    /* ── Support ── */
+    .support {
+      background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(219,39,119,0.1));
+      border: 1px solid rgba(167,139,250,0.2);
+      border-radius: var(--radius); padding: 48px 40px; text-align: center; margin-bottom: 80px;
+    }
+    .support h2 { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+    .support p { font-size: 15px; color: var(--muted); margin-bottom: 24px; }
+    .support-link {
+      display: inline-block;
+      border: 1px solid rgba(167,139,250,0.35); color: var(--accent);
+      padding: 11px 24px; border-radius: 10px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .support-link:hover { background: rgba(167,139,250,0.1); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0; text-align: center;
+    }
+    footer p { font-size: 13px; color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 500px) {
+      .hero { padding: 70px 0 60px; }
+      .requirements { padding: 24px; }
+      .support { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="container">
+
+    <nav>
+      <span class="nav-logo">LumaSync</span>
+      <a href="privacy.html">Privacy Policy</a>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-badge">For iPhone &amp; iPad</div>
+      <h1>Your lights,<br><span class="gradient">spatially aware.</span></h1>
+      <p class="hero-sub">LumaSync maps every Philips Hue bulb in 3D using LiDAR, then animates them as a coordinated system at 50Hz.</p>
+      <a class="app-store-btn" href="https://apps.apple.com/app/lumasync" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on the App Store
+      </a>
+    </section>
+
+    <section class="features">
+      <p class="section-label">Features</p>
+      <h2>Intelligence built in.</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <span class="feature-icon">📡</span>
+          <h3>Spatial Light Mapping</h3>
+          <p>LiDAR scans your room and identifies each bulb in 3D space automatically — no manual positioning needed.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🎵</span>
+          <h3>Live Music Sync</h3>
+          <p>Real-time FFT audio analysis maps bass, mid, and treble to spatial light zones. Works with any music source.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">✨</span>
+          <h3>Choreographed Shows</h3>
+          <p>Twilight Cascade, Aurora Spectrum, Halloween Storm, and more — each timed to the millisecond at 50Hz.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🎬</span>
+          <h3>Timeline Editor</h3>
+          <p>Build your own shows with the keyframe editor. Define exactly when each light changes colour, temperature, or brightness.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">⚡️</span>
+          <h3>50Hz Streaming</h3>
+          <p>DTLS Entertainment API bypasses the standard REST rate limit. A full room of lights responds in under 20ms.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🏠</span>
+          <h3>Full Room Control</h3>
+          <p>Individual lights, groups, zones — all controllable with colour, temperature, and brightness.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="requirements">
+      <h2>Requirements</h2>
+      <ul class="req-list">
+        <li><span class="dot"></span>Philips Hue Bridge v2 or later (firmware 1.24+)</li>
+        <li><span class="dot"></span>iPhone 12 Pro or later with LiDAR Scanner — required for spatial mapping</li>
+        <li><span class="dot"></span>Or any iPad Pro (2020 or later)</li>
+        <li><span class="dot"></span>iOS 17.0 or later</li>
+        <li><span class="dot"></span>All other features (live sync, shows, manual control) work without LiDAR</li>
+      </ul>
+    </div>
+
+    <div class="support">
+      <h2>Need help?</h2>
+      <p>Open an issue on GitHub and we'll get back to you.</p>
+      <a class="support-link" href="https://github.com/kalleeh/lumasync/issues" target="_blank" rel="noopener">Open an issue on GitHub</a>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Karl Wallbom &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy Policy</a></p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
