@@ -139,8 +139,8 @@
       box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
     }
 
-    /* Centre phone — larger, purple glow */
-    .phone-wrapper:nth-child(2) .phone-frame {
+    /* Centre phone (3rd of 5) — larger, purple glow */
+    .phone-wrapper:nth-child(3) .phone-frame {
       width: 258px;
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.07) inset,
@@ -148,8 +148,11 @@
         0 0 80px rgba(167,139,250,0.22),
         0 0 0 10px rgba(0,0,0,0.25);
     }
-    .phone-wrapper:nth-child(1) { transform: rotate(-2.5deg) translateY(18px); }
-    .phone-wrapper:nth-child(3) { transform: rotate(2.5deg) translateY(18px); }
+    /* Flanking phones tilt inward, outer two recede further */
+    .phone-wrapper:nth-child(1) { transform: rotate(-4deg) translateY(32px); opacity: 0.7; }
+    .phone-wrapper:nth-child(2) { transform: rotate(-2deg) translateY(16px); }
+    .phone-wrapper:nth-child(4) { transform: rotate(2deg)  translateY(16px); }
+    .phone-wrapper:nth-child(5) { transform: rotate(4deg)  translateY(32px); opacity: 0.7; }
 
     .phone-label {
       font-size: 11px; font-weight: 700;
@@ -258,16 +261,20 @@
       }
       .phone-grid::-webkit-scrollbar { display: none; }
 
-      /* Restore all 3 phones */
-      .phone-wrapper:nth-child(1),
-      .phone-wrapper:nth-child(3) { display: flex; }
+      /* Restore all 5 phones */
       .phone-wrapper:nth-child(1),
       .phone-wrapper:nth-child(2),
-      .phone-wrapper:nth-child(3) { transform: none; }
+      .phone-wrapper:nth-child(4),
+      .phone-wrapper:nth-child(5) { display: flex; opacity: 1; }
+      .phone-wrapper:nth-child(1),
+      .phone-wrapper:nth-child(2),
+      .phone-wrapper:nth-child(3),
+      .phone-wrapper:nth-child(4),
+      .phone-wrapper:nth-child(5) { transform: none; }
 
-      /* Uniform size — centre phone loses its desktop prominence */
+      /* Uniform size on mobile */
       .phone-frame,
-      .phone-wrapper:nth-child(2) .phone-frame { width: 230px; box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 0 28px 64px rgba(0,0,0,0.65), 0 0 0 10px rgba(0,0,0,0.25); }
+      .phone-wrapper:nth-child(3) .phone-frame { width: 230px; box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 0 28px 64px rgba(0,0,0,0.65), 0 0 0 10px rgba(0,0,0,0.25); }
 
       .phone-wrapper { scroll-snap-align: center; }
 
@@ -320,9 +327,9 @@
         <div class="phone-wrapper">
           <div class="phone-frame">
             <div class="dynamic-island"></div>
-            <img src="screen-shows.png" alt="Show Library" loading="lazy">
+            <img src="screen-activeshow.png" alt="Active Show" loading="lazy">
           </div>
-          <span class="phone-label">Show Library</span>
+          <span class="phone-label">Live Show</span>
         </div>
 
         <div class="phone-wrapper">
@@ -331,6 +338,22 @@
             <img src="screen-dashboard.png" alt="Studio Dashboard" loading="lazy">
           </div>
           <span class="phone-label">Studio</span>
+        </div>
+
+        <div class="phone-wrapper">
+          <div class="phone-frame">
+            <div class="dynamic-island"></div>
+            <img src="screen-timeline.png" alt="Timeline Editor" loading="lazy">
+          </div>
+          <span class="phone-label">Timeline Editor</span>
+        </div>
+
+        <div class="phone-wrapper">
+          <div class="phone-frame">
+            <div class="dynamic-island"></div>
+            <img src="screen-shows.png" alt="Show Library" loading="lazy">
+          </div>
+          <span class="phone-label">Show Library</span>
         </div>
 
         <div class="phone-wrapper">
@@ -345,6 +368,8 @@
       <!-- dot indicators — visible on mobile only -->
       <div class="scroll-dots" aria-hidden="true">
         <span class="active"></span>
+        <span></span>
+        <span></span>
         <span></span>
         <span></span>
       </div>
