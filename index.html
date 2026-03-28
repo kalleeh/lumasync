@@ -221,14 +221,58 @@
       .phone-wrapper:nth-child(2) .phone-frame { width: 215px; }
     }
 
+    /* ── Scroll dots (mobile carousel indicator) ── */
+    .scroll-dots {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      margin-top: 24px;
+    }
+    .scroll-dots span {
+      width: 6px; height: 6px; border-radius: 999px;
+      background: var(--muted);
+      transition: width 0.25s ease, background 0.25s ease;
+      flex-shrink: 0;
+    }
+    .scroll-dots span.active {
+      width: 22px; background: var(--accent);
+    }
+
     @media (max-width: 640px) {
       .container { padding: 0 20px; }
       .hero { padding: 80px 0 70px; }
       .feature-grid { grid-template-columns: 1fr; }
+
+      /* Carousel: break out of container padding, scroll full-bleed */
+      .phone-grid {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 16px;
+        /* peek the next/prev card by keeping container padding as visual gutter */
+        padding: 24px 20px 28px;
+        margin: 56px -20px 0;
+        justify-content: flex-start;
+      }
+      .phone-grid::-webkit-scrollbar { display: none; }
+
+      /* Restore all 3 phones */
       .phone-wrapper:nth-child(1),
-      .phone-wrapper:nth-child(3) { display: none; }
-      .phone-wrapper:nth-child(2) { transform: none; }
-      .phone-wrapper:nth-child(2) .phone-frame { width: 240px; }
+      .phone-wrapper:nth-child(3) { display: flex; }
+      .phone-wrapper:nth-child(1),
+      .phone-wrapper:nth-child(2),
+      .phone-wrapper:nth-child(3) { transform: none; }
+
+      /* Uniform size — centre phone loses its desktop prominence */
+      .phone-frame,
+      .phone-wrapper:nth-child(2) .phone-frame { width: 230px; box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 0 28px 64px rgba(0,0,0,0.65), 0 0 0 10px rgba(0,0,0,0.25); }
+
+      .phone-wrapper { scroll-snap-align: center; }
+
+      .scroll-dots { display: flex; }
+
       .requirements, .support { padding: 28px 24px; }
       .support { padding: 36px 28px; }
     }
@@ -296,6 +340,13 @@
           </div>
           <span class="phone-label">Live Sync</span>
         </div>
+      </div>
+
+      <!-- dot indicators — visible on mobile only -->
+      <div class="scroll-dots" aria-hidden="true">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
       </div>
     </section>
 
@@ -467,5 +518,23 @@
 
   </div>
 
+  <script>
+    // Update carousel dot indicator as user swipes
+    const grid = document.querySelector('.phone-grid');
+    const dots = document.querySelectorAll('.scroll-dots span');
+    if (grid && dots.length) {
+      const phones = Array.from(grid.querySelectorAll('.phone-wrapper'));
+      function updateDots() {
+        const mid = grid.scrollLeft + grid.offsetWidth / 2;
+        let closest = 0, minDist = Infinity;
+        phones.forEach((p, i) => {
+          const dist = Math.abs((p.offsetLeft + p.offsetWidth / 2) - mid);
+          if (dist < minDist) { minDist = dist; closest = i; }
+        });
+        dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+      }
+      grid.addEventListener('scroll', updateDots, { passive: true });
+    }
+  </script>
 </body>
 </html>
