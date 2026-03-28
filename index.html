@@ -28,224 +28,214 @@
       min-height: 100vh;
     }
 
-    .blobs {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-    }
-    .blob {
-      position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.18;
-    }
-    .blob-1 { width: 600px; height: 600px; background: #7c3aed; top: -200px; left: -200px; }
-    .blob-2 { width: 500px; height: 500px; background: #db2777; top: 200px; right: -150px; }
-    .blob-3 { width: 400px; height: 400px; background: #0ea5e9; bottom: -100px; left: 30%; }
+    /* ── Blobs ── */
+    .blobs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .blob  { position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.16; }
+    .blob-1 { width: 900px; height: 900px; background: #7c3aed; top: -300px; left: -300px; }
+    .blob-2 { width: 700px; height: 700px; background: #db2777; top: 300px; right: -200px; }
+    .blob-3 { width: 600px; height: 600px; background: #0ea5e9; bottom: -150px; left: 35%; }
 
+    /* ── Layout ── */
     .container {
       position: relative; z-index: 1;
-      max-width: 760px; margin: 0 auto; padding: 0 24px;
+      max-width: 1200px; margin: 0 auto; padding: 0 32px;
     }
+    /* Prose-width cap: keeps text comfortable on wide screens */
+    .narrow { max-width: 720px; margin-left: auto; margin-right: auto; }
 
+    /* ── Nav ── */
     nav {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 28px 0 0;
+      padding: 32px 0 0;
     }
     .nav-logo {
-      font-size: 18px; font-weight: 700; letter-spacing: -0.3px;
+      font-size: 19px; font-weight: 700; letter-spacing: -0.3px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    nav a {
-      color: var(--muted); text-decoration: none; font-size: 14px;
-      transition: color 0.2s;
-    }
+    nav a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
     nav a:hover { color: var(--text); }
 
-    .hero {
-      text-align: center;
-      padding: 100px 0 80px;
-    }
+    /* ── Hero ── */
+    .hero { text-align: center; padding: 110px 0 90px; }
     .hero-badge {
       display: inline-block;
       background: rgba(167,139,250,0.12);
       border: 1px solid rgba(167,139,250,0.25);
       color: var(--accent);
       font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 5px 14px; border-radius: 999px; margin-bottom: 28px;
+      padding: 5px 16px; border-radius: 999px; margin-bottom: 30px;
     }
     h1 {
-      font-size: clamp(36px, 6vw, 58px);
-      font-weight: 800; letter-spacing: -1.5px; line-height: 1.08;
-      margin-bottom: 20px;
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 800; letter-spacing: -2px; line-height: 1.06;
+      margin-bottom: 22px;
     }
     h1 .gradient {
       background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     .hero-sub {
-      font-size: 18px; color: var(--muted); max-width: 500px; margin: 0 auto 40px;
+      font-size: 19px; color: var(--muted);
+      max-width: 520px; margin: 0 auto 44px;
     }
     .app-store-btn {
       display: inline-flex; align-items: center; gap: 10px;
       background: var(--text); color: #000;
-      padding: 14px 28px; border-radius: 14px;
+      padding: 15px 30px; border-radius: 14px;
       font-weight: 700; font-size: 15px; text-decoration: none;
       transition: opacity 0.2s, transform 0.15s;
     }
     .app-store-btn:hover { opacity: 0.88; transform: translateY(-1px); }
     .app-store-btn svg { width: 20px; height: 20px; }
 
+    /* ── Section shared ── */
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px;
+    }
+
     /* ── Screenshots ── */
-    .screenshots { padding: 20px 0 80px; }
+    .screenshots { padding: 0 0 100px; }
+    .screenshots > .narrow { text-align: center; margin-bottom: 0; }
+    .screenshots h2 {
+      font-size: clamp(28px, 3vw, 38px); font-weight: 700;
+      letter-spacing: -0.7px; margin-bottom: 0;
+    }
 
     .phone-grid {
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      gap: 20px;
-      margin-top: 48px;
+      gap: 28px;
+      margin-top: 56px;
     }
 
     .phone-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 16px; flex-shrink: 0;
     }
 
     .phone-frame {
       position: relative;
-      width: 185px;
-      border-radius: 32px;
+      width: 220px;
+      border-radius: 38px;
       overflow: hidden;
-      background: #080808;
+      background: #060608;
       border: 1.5px solid rgba(255,255,255,0.10);
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.04) inset,
-        0 28px 64px rgba(0,0,0,0.65),
-        0 0 0 8px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+        0 32px 80px rgba(0,0,0,0.70),
+        0 0 0 10px rgba(0,0,0,0.25);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
-    .phone-frame:hover { transform: translateY(-6px); }
+    .phone-frame:hover { transform: translateY(-8px); }
+    .phone-frame img { width: 100%; display: block; border-radius: 37px; }
 
-    .phone-frame img {
-      width: 100%;
-      display: block;
-      border-radius: 31px;
-    }
-
-    /* Dynamic Island pill */
     .dynamic-island {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 30%;
-      height: 9px;
-      background: #080808;
-      border-radius: 999px;
-      z-index: 2;
+      position: absolute; top: 11px; left: 50%; transform: translateX(-50%);
+      width: 29%; height: 10px;
+      background: #060608; border-radius: 999px; z-index: 2;
       box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
     }
 
-    /* Centre phone is larger and glows purple */
+    /* Centre phone — larger, purple glow */
     .phone-wrapper:nth-child(2) .phone-frame {
-      width: 210px;
+      width: 258px;
       box-shadow:
-        0 0 0 1px rgba(255,255,255,0.06) inset,
-        0 36px 80px rgba(0,0,0,0.75),
-        0 0 60px rgba(167,139,250,0.18),
-        0 0 0 8px rgba(0,0,0,0.3);
+        0 0 0 1px rgba(255,255,255,0.07) inset,
+        0 40px 100px rgba(0,0,0,0.80),
+        0 0 80px rgba(167,139,250,0.22),
+        0 0 0 10px rgba(0,0,0,0.25);
     }
-    /* Left phone tilts slightly left */
-    .phone-wrapper:nth-child(1) { transform: rotate(-2deg) translateY(12px); }
-    /* Right phone tilts slightly right */
-    .phone-wrapper:nth-child(3) { transform: rotate(2deg) translateY(12px); }
+    .phone-wrapper:nth-child(1) { transform: rotate(-2.5deg) translateY(18px); }
+    .phone-wrapper:nth-child(3) { transform: rotate(2.5deg) translateY(18px); }
 
     .phone-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      color: var(--muted);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted);
     }
 
-    @media (max-width: 600px) {
-      .phone-wrapper:nth-child(1),
-      .phone-wrapper:nth-child(3) { display: none; }
-      .phone-wrapper:nth-child(2) { transform: none; }
-    }
-
-    .features { padding: 20px 0 80px; }
-    .section-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 14px;
-    }
+    /* ── Features ── */
+    .features { padding: 20px 0 100px; }
     .features h2 {
-      font-size: 30px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 48px;
+      font-size: clamp(28px, 3vw, 38px); font-weight: 700;
+      letter-spacing: -0.7px; margin-bottom: 52px;
     }
     .feature-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
     .feature-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 26px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 30px 28px;
     }
-    .feature-icon {
-      width: 48px; height: 48px; margin-bottom: 18px; display: block;
-    }
-    .feature-card h3 {
-      font-size: 16px; font-weight: 700; margin-bottom: 8px;
-    }
-    .feature-card p {
-      font-size: 14px; color: var(--muted); line-height: 1.6;
-    }
+    .feature-icon { width: 48px; height: 48px; margin-bottom: 20px; display: block; }
+    .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
+    /* ── Requirements ── */
     .requirements {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 36px; margin-bottom: 80px;
+      border-radius: var(--radius); padding: 40px;
+      max-width: 840px; margin: 0 auto 100px;
     }
-    .requirements h2 {
-      font-size: 20px; font-weight: 700; margin-bottom: 20px;
-    }
-    .req-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .req-list li {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: 14px; color: var(--muted);
-    }
+    .requirements h2 { font-size: 20px; font-weight: 700; margin-bottom: 22px; }
+    .req-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .req-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--muted); }
     .req-list li span.dot {
       width: 6px; height: 6px; border-radius: 50%;
-      background: var(--accent); flex-shrink: 0; margin-top: 7px;
+      background: var(--accent); flex-shrink: 0; margin-top: 8px;
     }
 
+    /* ── Support ── */
     .support {
-      background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(219,39,119,0.1));
-      border: 1px solid rgba(167,139,250,0.2);
-      border-radius: var(--radius); padding: 48px 40px; text-align: center; margin-bottom: 80px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(219,39,119,0.10));
+      border: 1px solid rgba(167,139,250,0.20);
+      border-radius: var(--radius);
+      max-width: 840px; margin: 0 auto 100px;
+      padding: 56px 48px; text-align: center;
     }
-    .support h2 { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
-    .support p { font-size: 15px; color: var(--muted); margin-bottom: 24px; }
+    .support h2 { font-size: 26px; font-weight: 700; margin-bottom: 10px; }
+    .support p { font-size: 16px; color: var(--muted); margin-bottom: 28px; }
     .support-link {
       display: inline-block;
       border: 1px solid rgba(167,139,250,0.35); color: var(--accent);
-      padding: 11px 24px; border-radius: 10px;
+      padding: 12px 26px; border-radius: 10px;
       font-size: 14px; font-weight: 600; text-decoration: none;
       transition: background 0.2s;
     }
-    .support-link:hover { background: rgba(167,139,250,0.1); }
+    .support-link:hover { background: rgba(167,139,250,0.10); }
 
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 0; text-align: center;
-    }
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; }
     footer p { font-size: 13px; color: var(--muted); }
     footer a { color: var(--muted); text-decoration: none; }
     footer a:hover { color: var(--text); }
 
-    @media (max-width: 500px) {
-      .hero { padding: 70px 0 60px; }
-      .requirements { padding: 24px; }
-      .support { padding: 32px 24px; }
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .phone-frame { width: 185px; }
+      .phone-wrapper:nth-child(2) .phone-frame { width: 215px; }
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .hero { padding: 80px 0 70px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .phone-wrapper:nth-child(1),
+      .phone-wrapper:nth-child(3) { display: none; }
+      .phone-wrapper:nth-child(2) { transform: none; }
+      .phone-wrapper:nth-child(2) .phone-frame { width: 240px; }
+      .requirements, .support { padding: 28px 24px; }
+      .support { padding: 36px 28px; }
+    }
+
+    @media (max-width: 400px) {
+      h1 { letter-spacing: -1.2px; }
+      .phone-wrapper:nth-child(2) .phone-frame { width: 200px; }
     }
   </style>
 </head>
@@ -264,6 +254,7 @@
       <a href="privacy.html">Privacy Policy</a>
     </nav>
 
+    <!-- ── Hero ── -->
     <section class="hero">
       <div class="hero-badge">For iPhone &amp; iPad</div>
       <h1>Your lights,<br><span class="gradient">spatially aware.</span></h1>
@@ -274,12 +265,14 @@
       </a>
     </section>
 
+    <!-- ── Screenshots ── -->
     <section class="screenshots">
-      <p class="section-label">In action</p>
-      <h2 style="font-size:30px;font-weight:700;letter-spacing:-0.5px;margin-bottom:0">Built for your home.</h2>
+      <div class="narrow">
+        <p class="section-label">In action</p>
+        <h2>Built for your home.</h2>
+      </div>
 
       <div class="phone-grid">
-
         <div class="phone-wrapper">
           <div class="phone-frame">
             <div class="dynamic-island"></div>
@@ -303,17 +296,16 @@
           </div>
           <span class="phone-label">Live Sync</span>
         </div>
-
       </div>
     </section>
 
+    <!-- ── Features ── -->
     <section class="features">
       <p class="section-label">Features</p>
       <h2>Intelligence built in.</h2>
       <div class="feature-grid">
 
         <div class="feature-card">
-          <!-- Spatial mapping: 3D axes with floating light-position dots and drop lines -->
           <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="gi1" x1="4" y1="44" x2="44" y2="4" gradientUnits="userSpaceOnUse">
@@ -342,7 +334,6 @@
         </div>
 
         <div class="feature-card">
-          <!-- Music sync: 5 equalizer bars with gradient fill -->
           <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="gi2" x1="4" y1="40" x2="44" y2="8" gradientUnits="userSpaceOnUse">
@@ -360,7 +351,6 @@
         </div>
 
         <div class="feature-card">
-          <!-- Shows: starburst with 8 rays and glowing centre -->
           <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="gi3" x1="4" y1="44" x2="44" y2="4" gradientUnits="userSpaceOnUse">
@@ -388,7 +378,6 @@
         </div>
 
         <div class="feature-card">
-          <!-- Timeline editor: two track lanes with coloured segments and a playhead -->
           <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="gi4" x1="4" y1="44" x2="44" y2="4" gradientUnits="userSpaceOnUse">
@@ -410,7 +399,6 @@
         </div>
 
         <div class="feature-card">
-          <!-- 50Hz streaming: lightning bolt with glow -->
           <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="gi5" x1="18" y1="6" x2="30" y2="44" gradientUnits="userSpaceOnUse">
@@ -430,7 +418,6 @@
         </div>
 
         <div class="feature-card">
-          <!-- Room control: floor plan with 3 glowing light circles -->
           <svg class="feature-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="gi6" x1="4" y1="44" x2="44" y2="4" gradientUnits="userSpaceOnUse">
@@ -455,6 +442,7 @@
       </div>
     </section>
 
+    <!-- ── Requirements ── -->
     <div class="requirements">
       <h2>Requirements</h2>
       <ul class="req-list">
@@ -466,6 +454,7 @@
       </ul>
     </div>
 
+    <!-- ── Support ── -->
     <div class="support">
       <h2>Need help?</h2>
       <p>Open an issue on GitHub and we'll get back to you.</p>
